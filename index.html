@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Strategic Communications</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --rust: #b85c38;
+    --muted: #8a8278;
+    --rule: rgba(201,168,76,0.25);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(15,14,12,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-mark {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-download {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .nav-download:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 4rem 6rem 5rem;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-title {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-location {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 5rem 6rem 4rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .hero-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--cream);
+    border-left: 2px solid var(--gold);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--rule);
+    padding: 0.35rem 0.75rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 6rem 5rem;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  /* ── EXPERTISE ── */
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .expertise-item {
+    padding: 2.5rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.3s;
+  }
+
+  .expertise-item:hover { background: rgba(201,168,76,0.04); }
+  .expertise-item:nth-child(2n) { border-right: none; }
+
+  .expertise-icon {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .expertise-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.75rem;
+  }
+
+  .expertise-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── TIMELINE ── */
+  #experience { padding: 6rem 5rem; }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 4rem 3rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .timeline-item.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .timeline-item.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -0.35rem;
+    top: 0.4rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    background: var(--gold);
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  .timeline-item:hover .timeline-dot { transform: scale(1.5); }
+
+  .timeline-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-org {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .timeline-role {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  .timeline-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .skill-chip {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid rgba(138,130,120,0.3);
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* ── EDUCATION ── */
+  .education-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .education-item {
+    padding: 2.5rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .education-item:nth-child(2n) { border-right: none; }
+
+  .education-degree {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+  }
+
+  .education-school {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .education-detail {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* ── GLOBAL FOOTPRINT ── */
+  .countries-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .country-tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: rgba(201,168,76,0.08);
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.8rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .country-tag:hover {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+  }
+
+  .footprint-intro {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 60ch;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: rgba(201,168,76,0.03);
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+
+  .contact-statement strong {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    group: true;
+  }
+
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    min-width: 5rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover .contact-link-value { color: var(--paper); }
+
+  /* ── PRINT / ATS VERSION ── */
+  .ats-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .ats-modal.open { display: flex; }
+
+  .ats-inner {
+    background: var(--paper);
+    color: var(--ink);
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 3rem;
+    position: relative;
+    font-family: var(--font-body);
+  }
+
+  .ats-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .ats-inner h1 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .ats-inner h2 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .ats-section-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: #444;
+  }
+
+  .ats-inner p { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.5rem; color: #333; }
+  .ats-inner ul { padding-left: 1.2rem; font-size: 0.85rem; color: #333; }
+  .ats-inner li { margin-bottom: 0.3rem; line-height: 1.5; }
+
+  .ats-job { margin-bottom: 1.25rem; }
+  .ats-job-title { font-weight: 500; font-size: 0.9rem; }
+  .ats-job-meta { font-size: 0.75rem; color: #666; margin-bottom: 0.3rem; }
+
+  .ats-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .ats-btn {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .ats-btn-primary { background: var(--ink); color: var(--paper); }
+  .ats-btn-secondary { background: transparent; color: var(--ink); border: 1px solid #ccc; }
+
+  /* ── AWARDS ── */
+  .awards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .award-item {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.2s;
+  }
+
+  .award-item:first-child { border-top: 1px solid var(--rule); }
+
+  .award-item:hover { background: rgba(201,168,76,0.03); }
+
+  .award-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--paper);
+    line-height: 1.3;
+  }
+
+  .award-detail {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .award-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 5rem 2rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+    .hero-right { padding: 3rem 2rem; }
+    section, #experience { padding: 4rem 2rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .expertise-item { border-right: none; }
+    .education-grid { grid-template-columns: 1fr; }
+    .education-item { border-right: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <span class="nav-mark">Strategic Communications</span>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#footprint">Global</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-download" onclick="document.querySelector('.ats-modal').classList.add('open')">↓ Download Resume</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Senior Communications Strategist</div>
+    <h1 class="hero-name">E. Nicole <em>Erwin</em></h1>
+    <p class="hero-title">Strategic Communications · Political Advocacy · Crisis Navigation</p>
+    <div class="hero-rule"></div>
+    <span class="hero-location">📍 Kentucky, USA &nbsp;·&nbsp; Remote</span>
+  </div>
+  <div class="hero-right">
+    <blockquote class="hero-statement">
+      I've spent my career trying to understand how information moves and why people respond to it the way they do — first as a journalist, then in political communications, now in advocacy. What I've found is that most organizations, when they're under pressure, already know more than they think they do. My job is to help them find that clarity — and then push until we act on it. I don't back down from hard conversations or difficult truths. In fact that's usually where the most important work happens. I'm drawn to complex, high-stakes environments — particularly in food systems and global health — where the communication challenges are genuinely hard and the stakes are real. I make things happen.
+    </blockquote>
+    <div class="hero-tags">
+      <span class="tag">Crisis Communications</span>
+      <span class="tag">Political Strategy</span>
+      <span class="tag">Narrative Building</span>
+      <span class="tag">Media Strategy</span>
+      <span class="tag">Food Systems</span>
+      <span class="tag">Global Health</span>
+      <span class="tag">Advocacy</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Areas of Expertise</h2>
+  </div>
+  <div class="expertise-grid">
+    <div class="expertise-item">
+      <div class="expertise-icon">// 01</div>
+      <div class="expertise-name">Narrative Strategy</div>
+      <p class="expertise-desc">The ability to anticipate how media will move and build narratives that connect — translating complex policy and systems work into stories that compel action.</p>
+    </div>
+    <div class="expertise-item">
+      <div class="expertise-icon">// 02</div>
+      <div class="expertise-name">Political Communications</div>
+      <p class="expertise-desc">Deep fluency in how power moves through information. Built from years inside journalism, party politics, and high-stakes advocacy in hostile environments.</p>
+    </div>
+    <div class="expertise-item">
+      <div class="expertise-icon">// 03</div>
+      <div class="expertise-name">Crisis Navigation</div>
+      <p class="expertise-desc">When organizations are under pressure, clarity is the rarest resource. I help leadership understand what's really happening — politically, publicly, narratively — and move decisively through it.</p>
+    </div>
+    <div class="expertise-item">
+      <div class="expertise-icon">// 04</div>
+      <div class="expertise-name">Strategic Advisory</div>
+      <p class="expertise-desc">People come to me to think through hard situations. I ask the right questions, find the clarity that's already there, and help organizations act on it without flinching.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Career</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">Feb 2025 — Present</span>
+        <span class="timeline-org">Planned Parenthood GNHAIK · Remote</span>
+      </div>
+      <div class="timeline-role">Strategic Communications Manager</div>
+      <p class="timeline-desc">Promoted to lead communications strategy across a six-state affiliate operating under sustained political attack. Oversee executive communications for the CEO, coordinate with policy teams on statewide strategy, and maintain cohesive messaging across clinical, development, education, and advocacy functions. Organize and train subject matter experts and spokespersons for local, regional, and national media. Key accomplishment: conceived and coordinated a six-state earned media campaign with States Newsroom — a national nonprofit news network — resulting in a series of independent stories across state outlets including the Kentucky Lantern and Idaho Capital Sun, documenting the impact of Medicaid cuts on reproductive healthcare access. The series positioned Planned Parenthood as resilient, mission-driven, and open for care during a period of existential political pressure — controlling the organization's narrative through credible journalism at exactly the moment it mattered most.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Executive Communications</span>
+        <span class="skill-chip">Crisis Communications</span>
+        <span class="skill-chip">Strategic Planning</span>
+        <span class="skill-chip">Political Communications</span>
+        <span class="skill-chip">Media Relations</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">Sept 2019 — Feb 2025</span>
+        <span class="timeline-org">Planned Parenthood GNHAIK · Remote</span>
+      </div>
+      <div class="timeline-role">Communications Manager</div>
+      <p class="timeline-desc">Built and managed organizational communications capacity across a multi-state nonprofit through multiple political cycles and crises. Formulated and executed communication strategies, messaging frameworks, and plans. Cultivated media relationships, executed external communications including talking points, op-eds, and press releases, and led rapid response and crisis communications across the six-state footprint.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Advocacy Communications</span>
+        <span class="skill-chip">Rapid Response</span>
+        <span class="skill-chip">Digital Media</span>
+        <span class="skill-chip">Internal Communications</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">Sept 2018 — Sept 2019</span>
+        <span class="timeline-org">Kentucky Democratic Party · Frankfort, KY</span>
+      </div>
+      <div class="timeline-role">Communications Director</div>
+      <p class="timeline-desc">Party-level communications strategy in one of the most challenging political environments in the country. Formulated and executed communication strategies and message discipline under real-time pressure. Cultivated relationships with Party alliance communication leaders and media. Produced talking points, scripts, press releases, and op-eds for rapid response situations.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Political Communications</span>
+        <span class="skill-chip">Rapid Response</span>
+        <span class="skill-chip">Message Strategy</span>
+        <span class="skill-chip">Media Relations</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">June 2016 — Aug 2019</span>
+        <span class="timeline-org">Ohio Valley ReSource / WKMS · OH, WV & KY</span>
+      </div>
+      <div class="timeline-role">Assistant News Director & Multimedia Reporter</div>
+      <p class="timeline-desc">Covered agriculture, food systems, and infrastructure across the Ohio Valley for a seven-station public radio collaborative spanning rural Kentucky, Ohio, and West Virginia. On-the-ground policy journalism at the intersection of food security, economic inequality, and environmental systems. Most significant work: broke the Marshall County High School shooting in January 2018 — racing to the scene with only a phone, reporting live, then following the story through gun access, child safety, and policy. Coverage picked up nationally by WBUR Here & Now (NPR, Boston).</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Agriculture Reporting</span>
+        <span class="skill-chip">Food Systems</span>
+        <span class="skill-chip">Infrastructure Policy</span>
+        <span class="skill-chip">Rural Communities</span>
+        <span class="skill-chip">Multimedia Journalism</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">May 2015 — June 2016</span>
+        <span class="timeline-org">Murray State University · Murray, KY</span>
+      </div>
+      <div class="timeline-role">Sustainable Science M.S. Program Development Coordinator</div>
+      <p class="timeline-desc">Helped coordinate the first interdisciplinary sustainable science graduate program at a Kentucky university — bridging academic research, institutional strategy, and program communications.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Sustainability</span>
+        <span class="skill-chip">Program Development</span>
+        <span class="skill-chip">Higher Education</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">Aug 2014 — Dec 2014</span>
+        <span class="timeline-org">Sky Greens Singapore · Fiji</span>
+      </div>
+      <div class="timeline-role">Project Lead — Vertical Farming Fiji</div>
+      <p class="timeline-desc">Led an independent initiative to assess the viability of commercial vertical farming systems in Fiji as a strategy to reduce import dependency and build agricultural resilience. Conducted a full Phase I feasibility study and presented findings directly to the Fiji Department of Agriculture — an early example of applied food systems thinking at the intersection of sustainability, economics, and policy.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Food Systems</span>
+        <span class="skill-chip">Feasibility Research</span>
+        <span class="skill-chip">Agricultural Resilience</span>
+        <span class="skill-chip">International Development</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">2009 — 2013</span>
+        <span class="timeline-org">South Korea · Australia</span>
+      </div>
+      <div class="timeline-role">International Journalist & Broadcaster</div>
+      <p class="timeline-desc">South Korean Presidential Scholar (TaLK Program) — taught English to underprivileged children in rural Jeju Island communities. Simultaneously worked as TV reporter, editor, and first female expat fill-in anchor at KCTV Jeju; host and producer of "New Eyes Fresh Feet" on Arirang Radio. Contributing writer for Jeju Weekly and Foreign Policy in Focus (South Korean naval base coverage). Graduate work placements at Australian Broadcasting Corporation and Australian Associated Press, Melbourne.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Broadcast Journalism</span>
+        <span class="skill-chip">TV Production & Hosting</span>
+        <span class="skill-chip">International Media</span>
+        <span class="skill-chip">Presidential Scholar</span>
+        <span class="skill-chip">Foreign Policy Reporting</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">2006 — 2009</span>
+        <span class="timeline-org">WKMS · WKNO Memphis · WAMU / NPR</span>
+      </div>
+      <div class="timeline-role">Public Radio Journalist</div>
+      <p class="timeline-desc">Started at WKMS in Murray, KY — "the place I fell in love with radio." Moved to WKNO Memphis as the only full-time reporter staffed with a news director, responsible for a listening area of 1.4 million. Interned and reported at WAMU in Washington D.C. covering the 2008 presidential election. Also served as Deputy State Coordinator for Students for Barack Obama in Kentucky — early roots of political communications instincts.</p>
+      <div class="timeline-skills">
+        <span class="skill-chip">Public Radio</span>
+        <span class="skill-chip">Political Journalism</span>
+        <span class="skill-chip">Election Coverage</span>
+        <span class="skill-chip">NPR / WAMU</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="education-grid">
+    <div class="education-item">
+      <div class="education-school">Monash University · Melbourne, Australia</div>
+      <div class="education-degree">Master of Sustainability — Honours Graduate, Division A</div>
+      <p class="education-detail">Focus on international development and environmental analysis. Academic foundation for food systems, climate, and global health work. Graduated with Honours.</p>
+    </div>
+    <div class="education-item">
+      <div class="education-school">Murray State University · Murray, KY</div>
+      <div class="education-degree">B.A. Psychology (major) · Journalism (minor)</div>
+      <p class="education-detail">Psychology as the foundation for understanding how people receive and process information — with journalism as the discipline for delivering it. The combination that underpins everything.</p>
+    </div>
+    <div class="education-item">
+      <div class="education-school">Georgetown University · Washington, D.C.</div>
+      <div class="education-degree">Institute on Political Journalism</div>
+      <p class="education-detail">Competitive summer fellowship at the intersection of political reporting and communications strategy in the national media capital. 2007.</p>
+    </div>
+    <div class="education-item">
+      <div class="education-school">University of Sunderland · England, UK</div>
+      <div class="education-degree">Political Science (Study Abroad)</div>
+      <p class="education-detail">Fall 2004. International academic experience grounding an early fluency in comparative political systems and global governance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Recognition</h2>
+  </div>
+  <div class="awards-list">
+    <div class="award-item">
+      <div class="award-name">Associated Press Radio Award — Class II</div>
+      <div class="award-detail">1st place: Best Enterprise Reporting, Best Sports Feature, Best Light News Feature · 2nd place: Best Special Series, Best Public Affairs, Best Use of Sound</div>
+    </div>
+    <div class="award-item">
+      <div class="award-name">Monash University Honours Graduate — Division A</div>
+      <div class="award-detail">Top honours classification in Masters of Sustainability · Melbourne, Australia</div>
+    </div>
+    <div class="award-item">
+      <div class="award-name">The Fund for American Studies — Journalism Leadership Fellow</div>
+      <div class="award-detail">Competitive national fellowship for emerging journalism leaders · 2011–2012</div>
+    </div>
+    <div class="award-item">
+      <div class="award-name">Marriott International — Spirit to Serve Award</div>
+      <div class="award-detail">Recognition of outstanding commitment to service and community impact · 2013 & 2014</div>
+    </div>
+    <div class="award-item">
+      <div class="award-name">Hearst Journalism Awards — Semifinalist</div>
+      <div class="award-detail">National recognition in competitive journalism awards program</div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL FOOTPRINT -->
+<section id="footprint">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Global Footprint</h2>
+  </div>
+  <p class="footprint-intro">Lived and worked across four continents. International experience isn't a line on a resume — it's a different way of understanding how information, culture, and power interact. Deliberately rooted in Kentucky.</p>
+  <div class="countries-grid">
+    <span class="country-tag">🇺🇸 United States</span>
+    <span class="country-tag">🇦🇺 Australia</span>
+    <span class="country-tag">🇫🇯 Fiji</span>
+    <span class="country-tag">🇰🇷 South Korea</span>
+    <span class="country-tag">🇬🇧 England</span>
+    <span class="country-tag">+ 22 Countries</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-statement">
+      The most important communications work happens when the stakes are <strong>real</strong> and the path isn't obvious.<br><br>That's where I do my best work.
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="/cdn-cgi/l/email-protection#044176736d6a2a4a6d676b6861444369656d682a676b69">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value"><span class="__cf_email__" data-cfemail="642116130d0a4a2a0d070b0801242309050d084a070b09">[email&#160;protected]</span></span>
+      </a>
+      <a class="contact-link" href="tel:2702936503">
+        <span class="contact-link-label">Phone</span>
+        <span class="contact-link-value">270.293.6503</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">linkedin.com/in/yourprofile</span>
+      </a>
+      <a class="contact-link" href="#">
+        <span class="contact-link-label">Location</span>
+        <span class="contact-link-value">Covington, Kentucky · Available Remotely</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ATS RESUME MODAL -->
+<div class="ats-modal" id="atsModal">
+  <div class="ats-inner">
+    <button class="ats-close" onclick="document.querySelector('.ats-modal').classList.remove('open')">×</button>
+    <h1>E. Nicole Erwin</h1>
+    <h2>Senior Strategic Communications Strategist</h2>
+    <p>Covington, KY · Remote · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c782b5b0aea9e989aea4a8aba28780aaa6aeabe9a4a8aa">[email&#160;protected]</a> · 270.293.6503</p>
+
+    <div class="ats-section-title">Professional Summary</div>
+    <p>Senior strategic communications professional with 15+ years of experience in political communications, crisis navigation, journalism, and advocacy. Expertise in narrative strategy, media relations, political communications, food systems, global health communications, and organizational crisis management. Track record of navigating high-stakes, politically hostile environments with clarity and conviction. M.S. Sustainability (Monash University, Honours), B.A. Psychology with Journalism minor (Murray State). Background in agriculture and infrastructure reporting across rural Appalachian communities. International experience across four continents.</p>
+
+    <div class="ats-section-title">Core Competencies</div>
+    <p>Strategic Communications · Crisis Communications · Political Communications · Narrative Strategy · Media Relations · Executive Communications · Food Systems Policy · Global Health Communications · Advocacy Strategy · Rapid Response · Message Development · Stakeholder Engagement · Internal Communications · Public Affairs · Issue Advocacy · Communications Planning · Spokesperson Training · Digital Media</p>
+
+    <div class="ats-section-title">Professional Experience</div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Strategic Communications Manager</div>
+      <div class="ats-job-meta">Planned Parenthood Great Northwest, Hawai'i, Alaska, Indiana, Kentucky · Feb 2025–Present · Remote</div>
+      <ul>
+        <li>Lead communications strategy across a six-state affiliate operating under sustained political attack</li>
+        <li>Oversee executive communications for the PPGNHAIK CEO</li>
+        <li>Coordinate with policy teams on statewide strategic communications encompassing objectives, target audiences, key messages, and media engagement</li>
+        <li>Organize and train subject matter experts and spokespersons for local, regional, and national media</li>
+        <li>Conceived and coordinated a six-state earned media campaign with States Newsroom, resulting in independent coverage across state outlets including the Kentucky Lantern and Idaho Capital Sun — documenting Medicaid cut impacts and positioning Planned Parenthood as resilient and open for care during a period of existential political threat</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Communications Manager</div>
+      <div class="ats-job-meta">Planned Parenthood Great Northwest, Hawai'i, Alaska, Indiana, Kentucky · Sept 2019–Feb 2025 · Remote</div>
+      <ul>
+        <li>Built and managed organizational communications capacity across a multi-state nonprofit through multiple political cycles</li>
+        <li>Formulated and executed communication strategies, messaging frameworks, and plans</li>
+        <li>Cultivated and sustained media relationships; executed external communications including talking points, op-eds, and press releases</li>
+        <li>Led rapid response and crisis communications across the six-state footprint</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Communications Director</div>
+      <div class="ats-job-meta">Kentucky Democratic Party · Sept 2018–Sept 2019 · Frankfort, KY</div>
+      <ul>
+        <li>Party-level strategic communications, rapid response, and message strategy</li>
+        <li>Cultivated relationships with Party alliance communications leaders and media</li>
+        <li>Produced talking points, scripts, press releases, and op-eds under real-time pressure</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Assistant News Director & Multimedia Reporter</div>
+      <div class="ats-job-meta">Ohio Valley ReSource / WKMS · June 2016–Aug 2019 · Seven-station collaborative, OH/WV/KY</div>
+      <ul>
+        <li>Covered agriculture, food systems, and infrastructure across rural Appalachian communities</li>
+        <li>Policy journalism at the intersection of food security, economic inequality, and environmental systems</li>
+        <li>Broke the Marshall County High School shooting (Jan. 2018) — reported live from scene with only a phone; followed story through gun access and child safety policy; coverage picked up nationally by WBUR Here & Now (NPR)</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Sustainable Science M.S. Program Development Coordinator</div>
+      <div class="ats-job-meta">Murray State University · May 2015–June 2016 · Murray, KY</div>
+      <ul>
+        <li>Helped coordinate the first interdisciplinary sustainable science graduate program at a Kentucky university</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Project Lead — Vertical Farming Fiji</div>
+      <div class="ats-job-meta">Sky Greens Singapore · Aug–Dec 2014 · Fiji</div>
+      <ul>
+        <li>Conducted Phase I feasibility study on commercial vertical farming systems to reduce import dependency and build agricultural resilience in Fiji</li>
+        <li>Presented findings directly to the Fiji Department of Agriculture</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">International Journalist & Broadcaster</div>
+      <div class="ats-job-meta">KCTV / Arirang Radio / ABC Australia / AAP / Jeju Weekly · 2009–2013 · South Korea & Australia</div>
+      <ul>
+        <li>South Korean Presidential Scholar (TaLK Program) — taught English to underprivileged children in rural Jeju Island communities</li>
+        <li>First female expat fill-in anchor at KCTV Jeju; host and producer of "New Eyes Fresh Feet," Arirang Radio</li>
+        <li>Contributing writer, Foreign Policy in Focus (South Korean naval base coverage)</li>
+        <li>Graduate work placements at Australian Broadcasting Corporation and Australian Associated Press, Melbourne</li>
+      </ul>
+    </div>
+
+    <div class="ats-job">
+      <div class="ats-job-title">Public Radio Journalist</div>
+      <div class="ats-job-meta">WKMS / WKNO Memphis / WAMU NPR · 2006–2009 · KY, TN & Washington D.C.</div>
+      <ul>
+        <li>Only full-time reporter at WKNO Memphis, responsible for a listening area of 1.4 million</li>
+        <li>Reported on 2008 presidential election at WAMU, Washington D.C.</li>
+        <li>Deputy State Coordinator, Students for Barack Obama — Kentucky</li>
+      </ul>
+    </div>
+
+    <div class="ats-section-title">Education</div>
+    <div class="ats-job">
+      <div class="ats-job-title">Master of Sustainability — Honours Graduate, Division A</div>
+      <div class="ats-job-meta">Monash University, Melbourne, Australia · 2012–2014</div>
+    </div>
+    <div class="ats-job">
+      <div class="ats-job-title">B.A. Psychology (major) · Journalism (minor)</div>
+      <div class="ats-job-meta">Murray State University, Murray, KY · 2003–2007</div>
+    </div>
+    <div class="ats-job">
+      <div class="ats-job-title">Institute on Political Journalism</div>
+      <div class="ats-job-meta">Georgetown University, Washington D.C. · Summer 2007</div>
+    </div>
+    <div class="ats-job">
+      <div class="ats-job-title">Political Science (Study Abroad)</div>
+      <div class="ats-job-meta">University of Sunderland, England · Fall 2004</div>
+    </div>
+
+    <div class="ats-section-title">Awards & Recognition</div>
+    <ul>
+      <li>Associated Press Radio Award Class II — 1st place: Best Enterprise Reporting, Best Sports Feature, Best Light News Feature; 2nd place: Best Special Series, Best Public Affairs, Best Use of Sound, Best Enterprise Reporting</li>
+      <li>Monash University Honours Graduate: Division A (HIIA)</li>
+      <li>The Fund for American Studies — Journalism Leadership Fellow, 2011–2012</li>
+      <li>Marriott International Spirit to Serve Award, 2013 & 2014</li>
+      <li>Hearst Journalism Awards Semifinalist</li>
+      <li>South Korean Presidential Scholar</li>
+    </ul>
+
+    <div class="ats-actions">
+      <button class="ats-btn ats-btn-primary" onclick="window.print()">Print / Save as PDF</button>
+      <button class="ats-btn ats-btn-secondary" onclick="document.querySelector('.ats-modal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Timeline scroll animation — add class after load so items are visible by default
+  window.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    // Add animation class after a brief delay so initial render shows content
+    setTimeout(() => {
+      timelineItems.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          item.classList.add('animate-on-scroll');
+        }
+      });
+    }, 100);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('animate-on-scroll');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    timelineItems.forEach(item => observer.observe(item));
+
+    // Smooth nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
